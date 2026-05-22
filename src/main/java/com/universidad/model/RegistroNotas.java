@@ -24,4 +24,9 @@ public class RegistroNotas {
             );
         }
     }
+
+    public boolean aproboMateria(double nota) {
+
+        return nota >= 3.0;
+    }
 }
