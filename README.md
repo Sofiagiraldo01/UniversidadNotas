@@ -114,3 +114,20 @@ valores límite y validación de reglas de negocio.
 | CP-10 | R4 | Registrar misma materia mismo semestre | Ya existe una nota registrada | Matemáticas - 2025-1 | Registrar nueva nota | Error por nota duplicada | Negativo |
 | CP-11 | R4 | Registrar misma materia diferente semestre | Existe nota previa | Matemáticas - 2025-2 | Registrar nueva nota | Registro exitoso | Positivo |
 | CP-12 | R4 | Registrar materias diferentes mismo semestre | Existe nota previa | Física - 2025-1 | Registrar nueva nota | Registro exitoso | Positivo |
+
+
+
+## Reflexión sobre TDD
+Diseñar primero los casos de prueba en una tabla antes de escribir código permitió tener 
+claridad sobre los escenarios que debía cubrir el sistema y los resultados esperados. Esto 
+ayudó a pensar en las validaciones, entradas válidas e inválidas y reglas del negocio desde 
+el inicio, evitando improvisar durante la programación. En comparación con programar 
+directamente, el proceso fue más ordenado y facilitó identificar errores y requisitos 
+faltantes antes de implementar la lógica.
+
+Lo más difícil de seguir el ciclo TDD fue mantener la disciplina de escribir primero las
+pruebas y luego el código mínimo para hacerlas pasar. En varios momentos surgió la 
+tentación de adelantarse y programar funcionalidades completas antes de ejecutar las 
+pruebas, especialmente cuando parecía más rápido escribir toda la lógica de una vez. Sin 
+embargo, seguir el ciclo Red → Green → Refactor ayudó a desarrollar código más seguro, 
+verificable y fácil de mantener.
