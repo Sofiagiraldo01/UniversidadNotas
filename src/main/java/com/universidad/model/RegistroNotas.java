@@ -1,9 +1,16 @@
 package com.universidad.model;
 
+import com.universidad.exception.NotaDuplicadaException;
+
+import java.util.HashSet;
+import java.util.Set;
+
 public class RegistroNotas {
 
     private static final double NOTA_MINIMA = 0.0;
     private static final double NOTA_MAXIMA = 5.0;
+
+    private final Set<String> registros = new HashSet<>();
 
     public void registrarNota(
             String estudiante,
@@ -13,23 +20,23 @@ public class RegistroNotas {
     ) {
 
         validarRangoNota(nota);
-    }
 
-    private void validarRangoNota(double nota) {
+        String clave = estudiante + materia + semestre;
 
-        if (nota < NOTA_MINIMA || nota > NOTA_MAXIMA) {
+        if (registros.contains(clave)) {
 
-            throw new IllegalArgumentException(
-                    "La nota debe estar entre 0.0 y 5.0"
+            throw new NotaDuplicadaException(
+                    "Ya existe una nota registrada para esta materia y semestre"
             );
         }
+
+        registros.add(clave);
     }
 
     public boolean aproboMateria(double nota) {
 
         return nota >= 3.0;
     }
-
 
     public double calcularPromedio(double... notas) {
 
@@ -44,5 +51,15 @@ public class RegistroNotas {
         }
 
         return suma / notas.length;
+    }
+
+    private void validarRangoNota(double nota) {
+
+        if (nota < NOTA_MINIMA || nota > NOTA_MAXIMA) {
+
+            throw new IllegalArgumentException(
+                    "La nota debe estar entre 0.0 y 5.0"
+            );
+        }
     }
 }
