@@ -71,4 +71,24 @@ public class RegistroNotasTest {
 
         assertFalse(resultado);
     }
+
+    @Test
+    void deberiaCalcularPromedioCorrectamente() {
+
+        RegistroNotas sistema = new RegistroNotas();
+
+        double promedio = sistema.calcularPromedio(4.0, 3.0);
+
+        assertEquals(3.5, promedio);
+    }
+
+    @Test
+    void deberiaRetornarCeroSiNoHayNotas() {
+
+        RegistroNotas sistema = new RegistroNotas();
+
+        double promedio = sistema.calcularPromedio();
+
+        assertEquals(0.0, promedio);
+    }
 }
