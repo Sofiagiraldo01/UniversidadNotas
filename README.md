@@ -68,3 +68,49 @@ de duplicados y comportamiento esperado del sistema.
 Afecta la lógica utilizada para detectar notas duplicadas,
 ya que el semestre puede representarse de diferentes formas.
 
+
+
+# Parte 2 — Diseño formal de casos de prueba
+Los siguientes casos de prueba fueron diseñados con base en los requerimientos
+funcionales del sistema utilizando técnicas de partición de equivalencia,
+valores límite y validación de reglas de negocio.
+
+| ID | Requerimiento | Descripción | Precondición | Datos de entrada | Pasos | Resultado esperado | Tipo |
+|---|---|---|---|---|---|---|---|
+
+
+## R1: Registrar nota entre 0.0 y 5.0
+
+| ID | Requerimiento | Descripción | Precondición | Datos de entrada | Pasos | Resultado esperado | Tipo |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| CP-01 | R1 | Registrar una nota válida | Sistema disponible | Nota: 4.0 | Registrar nota del estudiante | Registro exitoso | Positivo |
+| CP-02 | R1 | Registrar nota menor a 0.0 | Sistema disponible | Nota: -1.0 | Registrar nota del estudiante | Error indicando rango inválido | Negativo |
+| CP-03 | R1 | Registrar nota límite superior | Sistema disponible | Nota: 5.0 | Registrar nota del estudiante | Registro exitoso | Borde |
+
+
+## R2: Aprobar con nota >= 3.0
+
+| ID    | Requerimiento | Descripción                                   | Precondición   | Datos de entrada | Pasos                        | Resultado esperado   | Tipo     |
+|-------|----------------|-----------------------------------------------|----------------|------------------|-------------------------------|----------------------|----------|
+| CP-04 | R2             | Aprobar estudiante con nota mínima            | Nota registrada | Nota: 3.0        | Verificar estado académico    | Estudiante aprueba   | Borde    |
+| CP-05 | R2             | Reprobar estudiante por debajo del límite     | Nota registrada | Nota: 2.9        | Verificar estado académico    | Estudiante reprueba  | Borde    |
+| CP-06 | R2             | Aprobar estudiante con nota alta              | Nota registrada | Nota: 4.5        | Verificar estado académico    | Estudiante aprueba   | Positivo |
+
+
+## R3: Calcular promedio
+
+| ID    | Requerimiento | Descripción                              | Precondición              | Datos de entrada | Pasos               | Resultado esperado      | Tipo     |
+|-------|----------------|------------------------------------------|---------------------------|------------------|---------------------|-------------------------|----------|
+| CP-07 | R3             | Calcular promedio de varias notas        | Existen notas registradas | 4.0 y 3.0        | Calcular promedio   | Promedio igual a 3.5    | Positivo |
+| CP-08 | R3             | Calcular promedio sin notas              | Estudiante sin notas      | Ninguna          | Calcular promedio   | Promedio igual a 0.0    | Negativo |
+| CP-09 | R3             | Calcular promedio con una sola nota      | Existe una nota registrada| 5.0              | Calcular promedio   | Promedio igual a 5.0    | Positivo |
+
+
+
+## R4: Evitar registro duplicado de materias en el mismo semestre
+
+| ID | Requerimiento | Descripción | Precondición | Datos de entrada | Pasos | Resultado esperado | Tipo |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| CP-10 | R4 | Registrar misma materia mismo semestre | Ya existe una nota registrada | Matemáticas - 2025-1 | Registrar nueva nota | Error por nota duplicada | Negativo |
+| CP-11 | R4 | Registrar misma materia diferente semestre | Existe nota previa | Matemáticas - 2025-2 | Registrar nueva nota | Registro exitoso | Positivo |
+| CP-12 | R4 | Registrar materias diferentes mismo semestre | Existe nota previa | Física - 2025-1 | Registrar nueva nota | Registro exitoso | Positivo |
