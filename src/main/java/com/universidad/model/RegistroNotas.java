@@ -29,4 +29,20 @@ public class RegistroNotas {
 
         return nota >= 3.0;
     }
+
+
+    public double calcularPromedio(double... notas) {
+
+        if (notas.length == 0) {
+            return 0.0;
+        }
+
+        double suma = 0.0;
+
+        for (double nota : notas) {
+            suma += nota;
+        }
+
+        return suma / notas.length;
+    }
 }
