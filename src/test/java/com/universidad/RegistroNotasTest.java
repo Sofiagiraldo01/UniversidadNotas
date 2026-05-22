@@ -51,4 +51,24 @@ public class RegistroNotasTest {
                 )
         );
     }
+
+    @Test
+    void deberiaAprobarConNotaTres() {
+
+        RegistroNotas sistema = new RegistroNotas();
+
+        boolean resultado = sistema.aproboMateria(3.0);
+
+        assertTrue(resultado);
+    }
+
+    @Test
+    void deberiaReprobarConNotaMenorATres() {
+
+        RegistroNotas sistema = new RegistroNotas();
+
+        boolean resultado = sistema.aproboMateria(2.9);
+
+        assertFalse(resultado);
+    }
 }
