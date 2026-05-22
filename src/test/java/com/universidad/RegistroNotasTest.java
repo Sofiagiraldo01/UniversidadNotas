@@ -2,7 +2,7 @@ package com.universidad;
 
 import com.universidad.model.RegistroNotas;
 import org.junit.jupiter.api.Test;
-
+import com.universidad.exception.NotaDuplicadaException;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class RegistroNotasTest {
@@ -90,5 +90,27 @@ public class RegistroNotasTest {
         double promedio = sistema.calcularPromedio();
 
         assertEquals(0.0, promedio);
+    }
+
+    @Test
+    void deberiaLanzarErrorPorNotaDuplicada() {
+
+        RegistroNotas sistema = new RegistroNotas();
+
+        sistema.registrarNota(
+                "Juan",
+                "Matematicas",
+                "2025-1",
+                4.0
+        );
+
+        assertThrows(NotaDuplicadaException.class, () ->
+                sistema.registrarNota(
+                        "Juan",
+                        "Matematicas",
+                        "2025-1",
+                        3.5
+                )
+        );
     }
 }
